@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Encryption Standard (AES) Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .nav-link {
+            transition: background-color 0.3s;
+        }
+        .nav-link:hover {
+            background-color: rgb(59 130 246 / 0.1);
+        }
+        /* Custom smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <!-- Header -->
+    <header class="bg-green-600 text-white p-4 shadow-md fixed w-full z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold"><i class="fas fa-shield-alt mr-2"></i>AES Encryption Tutorial</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="#intro" class="nav-link px-3 py-2 rounded">Intro</a></li>
+                    <li><a href="#aes" class="nav-link px-3 py-2 rounded">How AES Works</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+        <!-- Introduction Section -->
+        <section id="intro" class="py-12 bg-white">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <h2 class="text-3xl font-semibold mb-6 text-center fade-in">Introduction to Advanced Encryption Standard (AES)</h2>
+                <p class="text-lg mb-4">AES is the current global standard for symmetric encryption, adopted in 2001 by NIST. It's designed to be secure, efficient, and fast across various platforms. AES encrypts data in 128-bit blocks and supports key sizes of 128, 192, or 256 bits. This tutorial delves into its history and importance.</p>
+                <div class="text-center mb-4">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e3d6b5d2-47c0-4a14-81fb-d0efc8d3fe0b.png" alt="Iconic illustration of a secure vault with digital locks and binary streams flowing into encrypted blocks, symbolizing the strength and reliability of AES encryption in a futuristic tech environment" class="mx-auto rounded-lg shadow-lg" onerror="this.style.display='none';" />
+                </div>
+                <p class="text-base mb-4">AES replaced the older DES standard due to its vulnerability to brute-force attacks in modern computing. It's used in protocols like TLS/SSL for HTTPS, VPNs, and secure file storage.</p>
+            </div>
+        </section>
+
+        <!-- AES Section -->
+        <section id="aes" class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <h2 class="text-3xl font-semibold mb-6 text-center fade-in">How AES Works - The Algorithm</h2>
+                <p class="text-lg mb-4">AES operates on a substitution-permutation network, processing data in rounds. The number of rounds varies by key size: 10 for 128-bit, 12 for 192-bit, and 14 for 256-bit keys. Each round combines four main transformations to ensure security through confusion and diffusion.</p>
+                <ol class="list-decimal list-inside mb-6 space-y-3">
+                    <li><strong>Key Expansion:</strong> Generate a set of round keys from the initial key. For a 128-bit key, this produces 11 keys (1 for initial + 10 for rounds). The expansion uses rotations, S-Box substitutions, and XOR operations.</li>
+                    <li><strong>AddRoundKey (Initial Round):</strong> XOR the 128-bit plaintext (treated as a 4x4 matrix of bytes) with the first round key. This integrates the key into the data early.</li>
+                    <li><strong>SubBytes:</strong> Each byte in the state matrix is substituted using a nonlinear S-Box. This provides confusion by replacing bytes with others in a fixed table.</li>
+                    <li><strong>ShiftRows:</strong> Shift the rows of the 4x4 matrix: the first row stays in place, the second shifts left by 1, third by 2, fourth by 3. This rearranges data for diffusion.</li>
+                    <li><strong>MixColumns:</strong> Each column is treated as a polynomial and multiplied by a fixed matrix in the finite field GF(2^8). This mixes data vertically for better diffusion.</li>
+                    <li><strong>AddRoundKey (Per Round):</strong> XOR the current state with the next round key.</li>
+                    <li><strong>Final Round (No MixColumns):</strong> Repeat SubBytes, ShiftRows, and AddRoundKey one last time.</li>
+                </ol>
+                <div class="text-center mb-6">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/419ca869-09b2-40aa-8f8b-c5567d2fc7a2.png" alt="Vivid schematic of AES encryption rounds with a 4x4 grid matrix evolving through phases: SubBytes substitutions, ShiftRows cycling shifts, MixColumns matrix multiplications, and AddRoundKey XOR layers, depicted in stages with flowing arrows and color-coded transformations" class="mx-auto rounded-lg shadow-lg" onerror="this.style.display='none';" />
+                </div>
+                <p class="text-base mb-4">Decryption mirrors this process with inverse operations: InvSubBytes, InvShiftRows, InvMixColumns, and the same AddRoundKey (using round keys in reverse). AES's design makes it resistant to known attacks through its balanced layers of substitution and permutation.</p>
+                <div class="bg-green-100 p-4 rounded-lg mb-4">
+                    <h4 class="font-semibold mb-2"><i class="fas fa-lightbulb mr-2"></i>Why AES is Secure</h4>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li><strong>Confusion:</strong> Made complex by SubBytes, obscuring the relation between key and ciphertext.</li>
+                        <li><strong>Diffusion:</strong> Achieved via ShiftRows and MixColumns, spreading plaintext changes across the encrypted data.</li>
+                        <li><strong>Large Key Space:</strong> 128-bit keys offer 2^128 possibilities, impractical to brute-force.</li>
+                        <li><strong>Efficiency:</strong> Fast on both hardware and software, optimized for modern processors.</li>
+                    </ul>
+                </div>
+                <p class="text-base">In practice, always use authenticated encryption modes like GCM for additional integrity. For implementation, libraries like OpenSSL or crypto-js handle AES safely.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-green-600 text-white text-center py-4">
+        <p>© 2023 AES Tutorial. Educating on Cryptography with HTML, CSS, and JavaScript.</p>
+    </footer>
+</body>
+</html>
+</content>
+</create_file>
